@@ -7,6 +7,7 @@ total = 0
 candidate_votes = {}
 voter_id = 0
 candidate_list = []
+my_reports = open("analysis/analysis.txt","w")
     # Path to collect data from the resources file
 data = os.path.join('Resources','election_data.csv')
     # Define the data
@@ -24,18 +25,22 @@ with open(data) as election_data:
             candidate_list.append(candidates)
             candidate_votes[candidates] = 0
         candidate_votes[candidates] += 1
-    print("Election Results")
-    print("---------------------")
-    print(f"Total Votes: {voter_id}")
-    print("---------------------")
+
+    output = ''
+    output += "\nElection Results\n\n"
+    output += "---------------------\n"
+    output += f"Total Votes: {voter_id}\n"
+    output += "---------------------\n\n"
     # Determine the percentage of votes each candidate won
     for candidate in candidate_votes:
         votes = candidate_votes.get(candidate)
         votes_percentage = float(votes)/float(total_vote) * 100
-        output = f"{candidate}: {votes_percentage:.3f}% ({votes})\n"
-        print(output)
-    print("---------------------")
+        output += f"{candidate}: {votes_percentage:.3f}% ({votes})\n\n"
+    output += "---------------------\n\n"
     max_votes = max(candidate_votes,key=candidate_votes.get)
     # Determine the winner of the election based on the most popular votes  
-    print(f"Winner: {max_votes}")   
-    print("---------------------")
+    output += f"Winner: {max_votes}\n\n"   
+    output += "---------------------\n"
+
+    print(output)
+    my_reports.write(output)
