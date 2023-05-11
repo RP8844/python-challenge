@@ -1,4 +1,3 @@
-# Rebeca Perez 05/10/2023
 # Python-challenge
 Module 3: Python Challenge
 
